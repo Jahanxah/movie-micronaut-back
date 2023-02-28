@@ -13,7 +13,6 @@ import io.micronaut.runtime.Micronaut;
         securitySchema = @SPDocSecurity(scheme = "ApiKey", type = "apiKey")
 )
 public class Application {
-
     public static void main(String[] args) {
         Micronaut.run(Application.class, args);
     }
