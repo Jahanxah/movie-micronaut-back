@@ -1,7 +1,6 @@
 package cn.subat.impl.movie.entity;
 
 import cn.subat.impl.spdoc.annotation.SPDocField;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -18,7 +17,7 @@ public class EpisodeEntity {
     @GeneratedValue
     @Column(name = "id")
     @SPDocField("电影id")
-    private String id;
+    private Long id;
 
     @SPDocField("电影id")
     @Column(name = "movie_id", nullable = false)

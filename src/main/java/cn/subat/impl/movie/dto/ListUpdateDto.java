@@ -22,7 +22,7 @@ public class ListUpdateDto {
     @GeneratedValue
     @Column(name = "id")
     @SPDocField("合集id")
-    private String id;
+    private Long id;
 
 
     @Column(name = "user_id", nullable = false)

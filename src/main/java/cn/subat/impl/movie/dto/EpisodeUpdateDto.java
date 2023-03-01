@@ -22,7 +22,7 @@ public class EpisodeUpdateDto {
     @GeneratedValue
     @Column(name = "id")
     @SPDocField("电影id")
-    private String id;
+    private Long id;
 
     @SPDocField("电影id")
     @Column(name = "movie_id", nullable = false)

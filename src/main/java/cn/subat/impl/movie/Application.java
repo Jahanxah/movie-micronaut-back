@@ -9,7 +9,7 @@ import io.micronaut.runtime.Micronaut;
         title = "Movie",
         key = "movie",
         version = "1.0.0",
-        url = "https://backend.uchur.net/api/",
+        url = "https://backend.uchur.net/",
         securitySchema = @SPDocSecurity(scheme = "ApiKey", type = "apiKey")
 )
 public class Application {

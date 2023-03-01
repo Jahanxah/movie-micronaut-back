@@ -1,7 +1,6 @@
 package cn.subat.impl.movie.entity;
 
 import cn.subat.impl.spdoc.annotation.SPDocField;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -10,7 +9,6 @@ import org.hibernate.annotations.Comment;
 import javax.persistence.*;
 
 @Entity
-@Data
 @Getter
 @Setter
 @Table(name = "movie_list")
@@ -20,7 +18,7 @@ public class ListEntity {
     @GeneratedValue
     @Column(name = "id")
     @SPDocField("合集id")
-    private String id;
+    private Long id;
 
 
     @Column(name = "user_id", nullable = false)
