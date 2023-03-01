@@ -6,6 +6,9 @@ import io.micronaut.serde.annotation.Serdeable;
 import io.micronaut.serde.config.naming.SnakeCaseStrategy;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Comment;
+
+import javax.persistence.Column;
 
 @Getter
 @Setter
@@ -40,4 +43,17 @@ public class EpisodeCreateDto {
     @SPDocField("选集视频时长")
     private Integer duration;
 
+
+    @Column(name = "resolution", columnDefinition = "longtext")
+    @Comment("分辨率")
+    private String resolution;
+
+    @Column(name = "thrid_party")
+    @Comment("第三方视频源")
+    private String thridParty;
+
+
+    public Long getPrice() {
+        return price / 100;
+    }
 }

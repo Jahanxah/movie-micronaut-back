@@ -41,7 +41,7 @@ public class EpisodeEntity {
 
 
     @Column(name = "play_range")
-    @Comment("单机试看时长")
+    @Comment("单集试看时长")
     private Integer playRange = 0;
 
 
@@ -76,6 +76,17 @@ public class EpisodeEntity {
 
 
     @Column(name = "state")
-    @Comment("状态")
+    @Comment("状态，1表示未上传，2表示转码中，3表示待发布，4表示已发布")
     private Integer state = 1;
+
+
+    @Column(name = "resolution", columnDefinition = "longtext")
+    @Comment("分辨率")
+    private String resolution;
+
+    @Column(name = "thrid_party")
+    @Comment("第三方视频源")
+    private String thridParty;
+
+
 }
