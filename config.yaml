@@ -1,10 +1,27 @@
+#电影接口
 rabbitmq:
   addresses: 47.96.226.188:5672
   username: root
   password: subat-dev
-  virtual-host: impl
+  virtual-host: subat
 datasources:
   default:
-    url: jdbc:mysql://47.96.226.188:3306/uchur
+    url: jdbc:mysql://47.96.226.188:3306/subat
     username: admin
     password: admin-dev
+
+
+
+
+
+    #uchur接口
+#    rabbitmq:
+#      addresses: 47.96.226.188:5672
+#      username: root
+#      password: subat-dev
+#      virtual-host: impl
+#    datasources:
+#      default:
+#        url: jdbc:mysql://47.96.226.188:3306/uchur
+#        username: admin
+#        password: admin-dev

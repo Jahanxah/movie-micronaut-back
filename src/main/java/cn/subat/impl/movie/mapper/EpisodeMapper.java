@@ -8,7 +8,8 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "jsr330")
 public interface EpisodeMapper {
 
-    EpisodeEntity createDtoToEntity(EpisodeCreateDto dto);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    EpisodeEntity createDtoToEntity(EpisodeCreateDto dto, @MappingTarget EpisodeEntity entity);
 
 
     EpisodeCommonDto entityToCommonDto(EpisodeEntity entity);

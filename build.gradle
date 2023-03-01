@@ -72,7 +72,7 @@ dependencies {
 
     implementation("io.micronaut.redis:micronaut-redis-lettuce")
 
-    implementation("cn.subat.impl:common:0.0.16")
+    implementation("cn.subat.impl:common:0.0.22")
     implementation("cn.subat.impl:spdoc:0.0.10")
     annotationProcessor("cn.subat.impl:spdoc:0.0.10")
 }

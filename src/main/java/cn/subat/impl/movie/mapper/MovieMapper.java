@@ -9,8 +9,9 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "jsr330")
 public interface MovieMapper {
 
-    MovieEntity createDtoToEntity(MovieCreateDto dto);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    MovieEntity createDtoToEntity(MovieCreateDto dto, @MappingTarget MovieEntity entity);
 
     MovieCommonDto entityToCommonDto(MovieEntity entity);
 
