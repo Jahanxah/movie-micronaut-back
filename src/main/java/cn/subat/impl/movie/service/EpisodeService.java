@@ -72,8 +72,8 @@ public class EpisodeService {
 
     @SPDocConsumer(tag = "电影选集-后台", value = "电影选集单个查询")
     @Queue("movie.episode.admin.one")
-    public ImplResponse<EpisodeCommonDto> one(Long episodeId) {
-        Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(episodeId);
+    public ImplResponse<EpisodeCommonDto> one(Long id) {
+        Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(id);
         if (episodeOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影选集不存在");
         } else {
@@ -84,8 +84,8 @@ public class EpisodeService {
 
     @SPDocConsumer(tag = "电影选集-后台", value = "电影选集发布")
     @Queue("movie.episode.admin.publish")
-    public ImplResponse<Boolean> publish(Long episodeId) {
-        Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(episodeId);
+    public ImplResponse<Boolean> publish(Long id) {
+        Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(id);
         if (episodeOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影选集不存在");
         } else {
@@ -103,8 +103,8 @@ public class EpisodeService {
 
     @SPDocConsumer(tag = "电影选集-后台", value = "电影选集状态")
     @Queue("movie.episode.admin.set.state")
-    public ImplResponse<EpisodeCommonDto> setState(Long episodeId) {
-        Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(episodeId);
+    public ImplResponse<EpisodeCommonDto> setState(Long id) {
+        Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(id);
         if (episodeOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影选集不存在");
         } else {
