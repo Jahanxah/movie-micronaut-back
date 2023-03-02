@@ -3,7 +3,6 @@ package cn.subat.impl.movie.entity;
 import cn.subat.impl.spdoc.annotation.SPDocField;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;

@@ -38,12 +38,12 @@ public class MovieService {
 
     @SPDocConsumer(tag = "电影-后台", value = "删除电影")
     @Queue("movie.admin.delete")
-    public ImplResponse<Boolean> deleteMovie(Long movieId) {
-        Optional<MovieEntity> movieOpt = movieRepository.findById(movieId);
+    public ImplResponse<Boolean> deleteMovie(Long id) {
+        Optional<MovieEntity> movieOpt = movieRepository.findById(id);
         if (movieOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影不存在");
         } else {
-            movieRepository.deleteById(movieId);
+            movieRepository.deleteById(id);
             return ImplResponse.of(true);
         }
     }
@@ -79,8 +79,8 @@ public class MovieService {
     }
 
     @SPDocConsumer(tag = "电影-后台", value = "电影发布")
-    @Queue("movie.admin.ispublish")
-    public ImplResponse<Integer> isPublish(Long id) {
+    @Queue("movie.admin.publish")
+    public ImplResponse<Boolean> isPublish(Long id) {
         Optional<MovieEntity> movieOpt = movieRepository.findById(id);
         if (movieOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影不存在");
@@ -88,13 +88,11 @@ public class MovieService {
             MovieEntity movieEntity = movieOpt.get();
             if (movieOpt.get().getIsPublished() == 1) {
                 movieEntity.setIsPublished(0);
-                movieRepository.update(movieEntity);
-                return ImplResponse.of(1, "电影已下架");
             } else {
                 movieEntity.setIsPublished(1);
-                movieRepository.update(movieEntity);
-                return ImplResponse.of(1, "电影已发布");
             }
+            movieRepository.update(movieEntity);
+            return ImplResponse.of(true);
         }
     }
 }

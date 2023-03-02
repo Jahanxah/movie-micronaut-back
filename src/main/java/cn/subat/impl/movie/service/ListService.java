@@ -7,17 +7,16 @@ import cn.subat.impl.movie.dto.ListCommonDto;
 import cn.subat.impl.movie.dto.ListCreateDto;
 import cn.subat.impl.movie.dto.ListUpdateDto;
 import cn.subat.impl.movie.entity.ListEntity;
-import cn.subat.impl.movie.entity.MovieEntity;
 import cn.subat.impl.movie.mapper.ListMapper;
 import cn.subat.impl.movie.repository.ListRepository;
 import cn.subat.impl.spdoc.annotation.SPDocConsumer;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.data.model.Page;
-import io.micronaut.data.model.query.QueryModel;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.rabbitmq.annotation.Queue;
 import io.micronaut.rabbitmq.annotation.RabbitListener;
 import lombok.AllArgsConstructor;
+
 
 import java.util.Optional;
 
@@ -72,8 +71,8 @@ public class ListService {
 
     @SPDocConsumer(tag = "电影合集-后台", value = "电影合集单个查询")
     @Queue("movie.list.admin.one")
-    public ImplResponse<ListCommonDto> one(Long listId) {
-        Optional<ListEntity> listOpt = listRepository.findById(listId);
+    public ImplResponse<ListCommonDto> one(Long Id) {
+        Optional<ListEntity> listOpt = listRepository.findById(Id);
         if (listOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影合集不存在");
         } else {
@@ -82,22 +81,19 @@ public class ListService {
     }
 
     @SPDocConsumer(tag = "电影合集-后台", value = "电影合集发布")
-    @Queue("movie.list.admin.ispublish")
-    public ImplResponse<Integer> isPublish(Long listId) {
-        Optional<ListEntity> listOpt = listRepository.findById(listId);
+    @Queue("movie.list.admin.publish")
+    public ImplResponse<Boolean> isPublish(Long id) {
+        Optional<ListEntity> listOpt = listRepository.findById(id);
         if (listOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影合集不存在");
-        } else {
-            ListEntity listEntity = listOpt.get();
-            if (listOpt.get().getIsPublished() == 1) {
-                listEntity.setIsPublished(0);
-                listRepository.update(listEntity);
-                return ImplResponse.of(0, "电影合集已下架");
-            } else {
-                listEntity.setIsPublished(1);
-                listRepository.update(listEntity);
-                return ImplResponse.of(1, "电影合集已发布");
-            }
         }
+        ListEntity listEntity = listOpt.get();
+        if (listEntity.getIsPublished() == 1) {
+            listEntity.setIsPublished(0);
+        } else {
+            listEntity.setIsPublished(1);
+        }
+        listRepository.update(listEntity);
+        return ImplResponse.of(true);
     }
 }

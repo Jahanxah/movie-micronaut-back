@@ -36,10 +36,9 @@ public class EpisodeService {
         return ImplResponse.of(true);
     }
 
-
     @SPDocConsumer(tag = "电影选集-后台", value = "删除电影选集")
     @Queue("movie.episode.admin.delete")
-    public ImplResponse<Boolean> deleteEpisode(@Body Long episodeId) {
+    public ImplResponse<Boolean> deleteEpisode(Long episodeId) {
         Optional<EpisodeEntity> entityOpt = episodeRepository.findById(episodeId);
         if (entityOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影选集不存在");
@@ -72,13 +71,54 @@ public class EpisodeService {
 
 
     @SPDocConsumer(tag = "电影选集-后台", value = "电影选集单个查询")
-    @Queue("movie.episode.admin.get")
-    public ImplResponse<EpisodeCommonDto> one(@Body Long episodeId) {
+    @Queue("movie.episode.admin.one")
+    public ImplResponse<EpisodeCommonDto> one(Long episodeId) {
         Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(episodeId);
         if (episodeOpt.isEmpty()) {
             return ImplResponse.of(-1, "电影选集不存在");
         } else {
             return ImplResponse.of(episodeMapper.entityToCommonDto(episodeOpt.get()));
+        }
+    }
+
+
+    @SPDocConsumer(tag = "电影选集-后台", value = "电影选集发布")
+    @Queue("movie.episode.admin.publish")
+    public ImplResponse<Boolean> publish(Long episodeId) {
+        Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(episodeId);
+        if (episodeOpt.isEmpty()) {
+            return ImplResponse.of(-1, "电影选集不存在");
+        } else {
+            EpisodeEntity episodeEntity = episodeOpt.get();
+            if (episodeEntity.getIsPublish() == 1) {
+                episodeEntity.setIsPublish(0);
+            } else {
+                episodeEntity.setIsPublish(1);
+            }
+            episodeRepository.update(episodeEntity);
+            return ImplResponse.of(true);
+        }
+    }
+
+
+    @SPDocConsumer(tag = "电影选集-后台", value = "电影选集状态")
+    @Queue("movie.episode.admin.set.state")
+    public ImplResponse<EpisodeCommonDto> setState(Long episodeId) {
+        Optional<EpisodeEntity> episodeOpt = episodeRepository.findById(episodeId);
+        if (episodeOpt.isEmpty()) {
+            return ImplResponse.of(-1, "电影选集不存在");
+        } else {
+            EpisodeEntity episodeEntity = episodeOpt.get();
+            if (episodeEntity.getState() == 1) {
+                return ImplResponse.of(1, "电影选集未上传");
+            } else if (episodeEntity.getState() == 2) {
+                return ImplResponse.of(1, "电影选集转码中");
+            } else if (episodeEntity.getState() == 3) {
+                return ImplResponse.of(1, "电影选集待发布");
+            } else if (episodeEntity.getState() == 4) {
+                return ImplResponse.of(1, "电影选集已发布");
+            }
+            return ImplResponse.of(1, "请耐心等待。。。。。");
         }
     }
 }

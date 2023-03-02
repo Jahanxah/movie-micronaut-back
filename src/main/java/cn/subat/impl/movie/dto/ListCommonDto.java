@@ -18,8 +18,5 @@ public class ListCommonDto extends ListUpdateDto {
     private Integer itemCount;
     @SPDocField("是否发布")
     private Integer isPublished;
-    @SPDocField("电影季")
-    private Integer type;
-
 
 }

@@ -7,22 +7,27 @@ import io.micronaut.serde.config.naming.SnakeCaseStrategy;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @Introspected
 @Serdeable(naming = SnakeCaseStrategy.class)
 public class MovieCreateDto {
     @SPDocField("绑定用户id")
+    @NotNull(message = "绑定用户id不能为空")
     private Long userId;
-
     @SPDocField("电影名称")
+    @NotNull(message = "电影名称不能为空")
     private String name;
 
     @SPDocField("电影描述")
     private String description;
     @SPDocField("电影封面")
+    @NotNull(message = "电影封面不能为空")
     private String poster;
     @SPDocField("电影封面16:9")
+    @NotNull(message = "电影封面16:9不能为空")
     private String poster_16_9;
     @SPDocField("价格")
     private Long price;
@@ -43,8 +48,4 @@ public class MovieCreateDto {
     @SPDocField("电影预览地址")
     private String previewUrl;
 
-
-    public Long getPrice() {
-        return price * 100;
-    }
 }

@@ -37,7 +37,7 @@ public class EpisodeEntity {
 
     @Column(name = "price")
     @Comment("单集价格")
-    private Long price = -100L;
+    private Integer price = 0;
 
 
     @Column(name = "play_range")
@@ -62,17 +62,17 @@ public class EpisodeEntity {
 
     @Column(name = "play_count")
     @Comment("播放次数")
-    private Integer playCount = 0;
+    private Long playCount = 0L;
 
 
     @Column(name = "sale_count")
     @Comment("购买次数")
-    private Integer saleCount = 0;
+    private Long saleCount = 0L;
 
 
     @Column(name = "comment_count")
     @Comment("评论次数")
-    private Integer commentCount = 0;
+    private Long commentCount = 0L;
 
 
     @Column(name = "state")
@@ -89,4 +89,7 @@ public class EpisodeEntity {
     private String thridParty;
 
 
+    @Column(name = "publish")
+    @Comment("是否发布")
+    private Integer isPublish;
 }

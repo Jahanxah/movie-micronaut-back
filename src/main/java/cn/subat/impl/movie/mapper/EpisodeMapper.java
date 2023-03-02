@@ -14,7 +14,6 @@ public interface EpisodeMapper {
 
     EpisodeCommonDto entityToCommonDto(EpisodeEntity entity);
 
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     EpisodeEntity updateFromDto(EpisodeUpdateDto dto, @MappingTarget EpisodeEntity entity);
 

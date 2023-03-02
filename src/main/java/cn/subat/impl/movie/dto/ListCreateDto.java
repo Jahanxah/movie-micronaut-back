@@ -7,6 +7,8 @@ import io.micronaut.serde.config.naming.SnakeCaseStrategy;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @Introspected
@@ -14,15 +16,16 @@ import lombok.Setter;
 
 public class ListCreateDto {
     @SPDocField("创建着id")
+    @NotNull(message = "创建着id不能为空")
     private Long userId;
     @SPDocField("合集名称")
+    @NotNull(message = "合集标题不能为空")
     private String name;
     @SPDocField("合集描述")
     private String description;
     @SPDocField("合集封面")
+    @NotNull(message = "合集封面不能为空")
     private String poster;
     @SPDocField("电影季")
     private Integer type;
-    @SPDocField("合集包含的电影数量")
-    private Integer itemCount;
 }
